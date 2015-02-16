@@ -1,7 +1,7 @@
 java_home: /usr/bin/java
 
 jetty_workspace: /tmp/jetty
-jetty_version: '9.2.5.v20141112'
+jetty_version: '9.2.7.v20150116'
 jetty_user: jetty
 jetty_path: /opt/jetty
 jetty_host: 0.0.0.0
