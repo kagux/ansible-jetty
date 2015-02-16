@@ -1,0 +1,37 @@
+- name: create jetty workspace dir
+  file: >
+    path={{jetty_workspace}}
+    state=directory
+
+- name: clean up jetty distination path
+  file: >
+    path={{ jetty_path }}
+    state=absent
+    force=yes
+
+- name: download jetty
+  get_url: >
+    url=http://download.eclipse.org/jetty/stable-9/dist/{{jetty_filename}}.tar.gz
+    dest={{ jetty_workspace }}/{{ jetty_filename }}.tar.gz
+    force=no
+
+- name: extract jetty
+  command: >
+    tar -C {{ jetty_workspace }} -xvzf {{ jetty_workspace }}/{{ jetty_filename }}.tar.gz
+
+- name: move jetty to distination path
+  command: mv {{ jetty_workspace }}/{{ jetty_filename }} {{ jetty_path }}
+
+- name: remove demo-base 
+  file: path={{jetty_path}}/demo-base state=absent force=yes
+
+- name: add jetty user
+  user: name=jetty shell=/bin/false createhome=no
+
+- name: configure jetty
+  template: src=jetty.j2 dest=/etc/default/jetty
+
+- name: create installed jetty marker
+  file: > 
+    path={{ jetty_path }}/{{ jetty_filename }}.installed
+    state=touch

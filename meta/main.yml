@@ -1,0 +1,10 @@
+dependencies: []
+galaxy_info:
+  author: Boris Mikhaylov
+  description: Installs jetty from distribution package
+  platforms:
+    - ubuntu
+
+  categories:
+    - development
+    - system

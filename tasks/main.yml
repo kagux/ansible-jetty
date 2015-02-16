@@ -1,0 +1,11 @@
+- name: Set jetty_filename for Jetty 9
+  set_fact: >
+    jetty_filename=jetty-distribution-{{ jetty_version }}
+
+- name: check if jetty is installed
+  stat: >
+    path={{ jetty_path }}/{{ jetty_filename }}.installed
+  register: jetty_installation
+
+- include: install_jetty.yml
+  when: not jetty_installation.stat.exists
