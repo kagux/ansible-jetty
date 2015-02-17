@@ -13,6 +13,7 @@
   get_url: >
     url=http://download.eclipse.org/jetty/stable-9/dist/{{jetty_filename}}.tar.gz
     dest={{ jetty_workspace }}/{{ jetty_filename }}.tar.gz
+    timeout=30
     force=no
 
 - name: extract jetty
